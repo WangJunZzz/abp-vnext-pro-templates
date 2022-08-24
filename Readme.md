@@ -33,34 +33,6 @@ Abp Vnext Vue 实现版本
 - [文档地址](http://doc.cncore.club/)
 - [演示地址 ](http://120.24.194.14:8012/)
 
-## ✨ 系统功能
-
-- [x] 用户管理
-- [x] 角色管理
-- [x] 审计日志
-- [x] 后台任务
-- [x] 集成事件
-- [x] IdentityServer4
-  - [x] 客户端管理
-  - [x] Api 资源管理
-  - [x] ApiScope 管理
-  - [x] Identity 资源管理
-- [x] SinglaR 消息通知(站内信)
-- [x] 多语言
-- [x] 数据字典
-- [x] 容器化部署
-- [x] 单元测试
-- [x] ES 日志
-- [x] Setting 管理
-- [x] 多租户
-- [x] 文件管理
-
-## 📦 安装
-
-- 下载代码生成器，Git 仓库(https://github.com/WangJunZzz/abp-vnext-pro-gui)
-
-  ![](https://blog-resouce.oss-cn-shenzhen.aliyuncs.com/images/abp/gui.png)
-
 ## 🗺 开发路线
 
 查看[开发路线](https://github.com/WangJunZzz/abp-vnext-pro/projects)来了解我们的开发计划。
