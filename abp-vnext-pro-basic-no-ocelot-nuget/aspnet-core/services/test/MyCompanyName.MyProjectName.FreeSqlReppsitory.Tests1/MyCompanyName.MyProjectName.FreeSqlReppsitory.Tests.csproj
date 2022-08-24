@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\..\common.props" />
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\MyCompanyName.MyProjectName.FreeSqlReppsitory\MyCompanyName.MyProjectName.FreeSqlReppsitory.csproj" />
+	  <ProjectReference Include="..\MyCompanyName.MyProjectName.TestBase\MyCompanyName.MyProjectName.TestBase.csproj" />
+	</ItemGroup>
+
+</Project>
