@@ -41,7 +41,6 @@ namespace MyCompanyName.MyProjectName
             ConfigureSwaggerServices(context);
             ConfigureJwtAuthentication(context, configuration);
             ConfigureHangfireMysql(context);
-            ConfigureHttpClient(context);
             ConfigureMiniProfiler(context);
             ConfigureAbpExceptions(context);
             ConfigureIdentity(context);
@@ -223,31 +222,6 @@ namespace MyCompanyName.MyProjectName
         }
 
 
-        private void ConfigureHttpClient(ServiceConfigurationContext context)
-        {
-            context.Services.AddHttpClient(context.Services.GetConfiguration().GetSection("HttpClient:Sts:Name").Value,
-                options =>
-                {
-                    options.BaseAddress =
-                        new Uri(context.Services.GetConfiguration().GetSection("HttpClient:Sts:Url")
-                            .Value);
-                });
-            context.Services.AddHttpClient(context.Services.GetConfiguration().GetSection("HttpClient:Github:Name").Value,
-                options =>
-                {
-                    options.BaseAddress =
-                        new Uri(context.Services.GetConfiguration().GetSection("HttpClient:Github:Url")
-                            .Value);
-                });
-            context.Services.AddHttpClient(context.Services.GetConfiguration().GetSection("HttpClient:GithubApi:Name").Value,
-                options =>
-                {
-                    options.BaseAddress =
-                        new Uri(context.Services.GetConfiguration().GetSection("HttpClient:GithubApi:Url")
-                            .Value);
-                });
-          
-        }
 
         /// <summary>
         /// 配置Identity
