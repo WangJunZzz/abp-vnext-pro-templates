@@ -33,6 +33,10 @@ export default {
   audit_entityInfo: '实体信息',
   audit_message: '报文',
   audit_applicationName: '应用名称',
+  audit_hasException: '是否异常',
+  audit_hasException_all: '全部',
+  audit_hasException_yes: '是',
+  audit_hasException_no: '否',
   grantedMessage: '授权成功，请重新登录.',
   close: '关闭',
 
