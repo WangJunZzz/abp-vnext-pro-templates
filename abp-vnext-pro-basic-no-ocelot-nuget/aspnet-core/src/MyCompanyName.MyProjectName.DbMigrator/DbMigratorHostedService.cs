@@ -4,11 +4,13 @@ namespace MyCompanyName.MyProjectName.DbMigrator
     {
         private readonly IHostApplicationLifetime _hostApplicationLifetime;
         private readonly IConfiguration _configuration;
+        private readonly IHostEnvironment _hostEnvironment;
         public DbMigratorHostedService(IHostApplicationLifetime hostApplicationLifetime,
-            IConfiguration configuration)
+            IConfiguration configuration, IHostEnvironment hostEnvironment)
         {
             _hostApplicationLifetime = hostApplicationLifetime;
             _configuration = configuration;
+            _hostEnvironment = hostEnvironment;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -21,12 +23,15 @@ namespace MyCompanyName.MyProjectName.DbMigrator
                    }))
             {
                 await application.InitializeAsync();
-
+                var conn = _configuration.GetValue<string>("ConnectionStrings:Default");
+                Console.WriteLine("ConnectionStrings:" + conn);
+                var s = _hostEnvironment.EnvironmentName;
+                Console.WriteLine("EnvironmentName:" + s);
                 await application
                     .ServiceProvider
                     .GetRequiredService<MyProjectNameDbMigrationService>()
                     .MigrateAsync();
-
+                
                 await application.ShutdownAsync();
 
                 _hostApplicationLifetime.StopApplication();
