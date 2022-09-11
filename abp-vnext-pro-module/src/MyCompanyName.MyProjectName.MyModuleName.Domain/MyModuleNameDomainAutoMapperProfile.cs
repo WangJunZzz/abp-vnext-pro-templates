@@ -1,8 +1,8 @@
 namespace MyCompanyName.MyProjectName.MyModuleName
 {
-    public class DataDictionaryDomainAutoMapperProfile : Profile
+    public class MyModuleNameDomainAutoMapperProfile : Profile
     {
-        public DataDictionaryDomainAutoMapperProfile()
+        public MyModuleNameDomainAutoMapperProfile()
         {
         }
     }

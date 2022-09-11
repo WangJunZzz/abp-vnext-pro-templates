@@ -2,7 +2,7 @@ using IObjectMapper = Volo.Abp.ObjectMapping.IObjectMapper;
 
 namespace MyCompanyName.MyProjectName.MyModuleName
 {
-    public abstract class DataDictionaryDomainService : DomainService
+    public abstract class MyModuleNameDomainService : DomainService
     {
         protected Type ObjectMapperContext { get; set; }
 

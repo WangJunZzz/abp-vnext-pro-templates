@@ -6,12 +6,7 @@
     "Permission:MyModuleName": "MyModuleName",
     "Permission:Create": "Create",
     "Permission:Update": "Update",
-    "Permission:Delete": "Delete",
-    
-    "MyCompanyName.MyProjectName.MyModuleName:100001": "DataDictionary Exist",
-    "MyCompanyName.MyProjectName.MyModuleName:100002": "DataDictionary Not Exist",
-    "MyCompanyName.MyProjectName.MyModuleName:100003": "DataDictionaryDetail Exist",
-    "MyCompanyName.MyProjectName.MyModuleName:100004": "DataDictionaryDetail Not Exist"
+    "Permission:Delete": "Delete"
     
   }
 }

@@ -3,14 +3,9 @@
   "texts": {
     "ManageYourProfile": "管理个人资料",
     "SamplePageMessage": "MyModuleName模块的示例页面",
-    "Permission:MyModuleName": "数据字典",
+    "Permission:MyModuleName": "MyModuleName",
     "Permission:Create": "创建",
     "Permission:Update": "编辑",
-    "Permission:Delete": "删除",
-
-    "MyCompanyName.MyProjectName.MyModuleName:100001": "数据字典已存在",
-    "MyCompanyName.MyProjectName.MyModuleName:100002": "数据字典不存在",
-    "MyCompanyName.MyProjectName.MyModuleName:100003": "数据字典明细已存在",
-    "MyCompanyName.MyProjectName.MyModuleName:100004": "数据字典明细不存在"
+    "Permission:Delete": "删除"
   }
 }
