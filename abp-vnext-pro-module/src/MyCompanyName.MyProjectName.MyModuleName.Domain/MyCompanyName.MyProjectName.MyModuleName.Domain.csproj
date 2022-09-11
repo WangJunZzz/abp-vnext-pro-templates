@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>MyCompanyName.MyProjectName.MyModuleName</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+    <PackageReference Include="Volo.Abp.Caching" />
+   
+    <ProjectReference Include="..\MyCompanyName.MyProjectName.MyModuleName.Domain.Shared\MyCompanyName.MyProjectName.MyModuleName.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
