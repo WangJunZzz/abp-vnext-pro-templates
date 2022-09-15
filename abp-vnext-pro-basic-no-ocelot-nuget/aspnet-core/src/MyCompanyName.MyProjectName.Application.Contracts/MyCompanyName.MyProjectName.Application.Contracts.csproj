@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>netstandard2.1</TargetFramework>
         <RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
     </PropertyGroup>
 
@@ -12,7 +12,6 @@
 
     <ItemGroup>
 
-        <PackageReference Include="Volo.Abp.ObjectExtending"/>
         <PackageReference Include="Lion.AbpPro.BasicManagement.Application.Contracts"/>
         <PackageReference Include="Lion.AbpPro.NotificationManagement.Application.Contracts"/>
         <PackageReference Include="Lion.AbpPro.DataDictionaryManagement.Application.Contracts"/>
