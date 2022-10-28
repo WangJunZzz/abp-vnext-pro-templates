@@ -42,7 +42,6 @@ namespace MyCompanyName.MyProjectName
             ConfigureJwtAuthentication(context, configuration);
             ConfigureHangfireMysql(context);
             ConfigureMiniProfiler(context);
-            ConfigureAbpExceptions(context);
             ConfigureIdentity(context);
             ConfigureAuditLog(context);
         }
@@ -91,14 +90,6 @@ namespace MyCompanyName.MyProjectName
             }
         }
 
-        /// <summary>
-        /// 异常处理
-        /// </summary>
-        /// <param name="context"></param>
-        private void ConfigureAbpExceptions(ServiceConfigurationContext context)
-        {
-            context.Services.AddMvc(options => { options.Filters.Add(typeof(ResultExceptionFilter)); });
-        }
 
    
 

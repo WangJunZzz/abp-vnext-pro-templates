@@ -18,7 +18,6 @@ global using MyCompanyName.MyProjectName.EntityFrameworkCore;
 global using MyCompanyName.MyProjectName.Extensions;
 global using MyCompanyName.MyProjectName.Extensions.Hangfire;
 global using MyCompanyName.MyProjectName.Extensions.Middlewares;
-global using MyCompanyName.MyProjectName.Extensions.MVC.Filters;
 global using MyCompanyName.MyProjectName.Extensions.System;
 global using MyCompanyName.MyProjectName.MultiTenancy;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
