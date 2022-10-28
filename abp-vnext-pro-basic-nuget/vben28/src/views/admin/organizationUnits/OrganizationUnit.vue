@@ -120,12 +120,10 @@ import CreateOrganizationUnit from "./CreateOrganizationUnit.vue";
 import EditOrganizationUnit from "./EditOrganizationUnit.vue";
 import AddRoleToOrganizationUnit from "./AddRoleToOrganizationUnit.vue";
 import AddUserToOrganizationUnit from "./AddUserToOrganizationUnit.vue";
-
+import { usePermission } from '/@/hooks/web/usePermission';
 import { useModal } from "/@/components/Modal";
 import { useMessage } from "/@/hooks/web/useMessage";
 import { useI18n } from "/@/hooks/web/useI18n";
-
-
 export default defineComponent({
   name: "OrganizationUnit",
   components: {
@@ -149,7 +147,7 @@ export default defineComponent({
     const [registerEditOrganizationUnit, { openModal: EditOrganizationUnitModal }] = useModal();
     const [registerAddRoleToOrganizationUnit, { openModal: AddRoleToOrganizationUnitModal }] = useModal();
     const [registerAddUserToOrganizationUnit, { openModal: AddUserToOrganizationUnitModal }] = useModal();
-
+    const { hasPermission } = usePermission();
     let organizationUnitId: string = "";
     const openAddUserToOrganizationUnitModal= ()=>{
       if(organizationUnitId)
@@ -169,7 +167,6 @@ export default defineComponent({
     onMounted(async () => {
       await initOrganizationUnit();
     });
-
     // 新增根节点
     function createRootOrganizationUnit() {
       let record = {
@@ -178,12 +175,14 @@ export default defineComponent({
       };
       CreateOrganizationUnitModal(true, { record });
     }
-
     function getRightMenuList(node: any): ContextMenuItem[] {
-    
+      let create = hasPermission('AbpIdentity.OrganizationUnitManagement.Create');
+      let update = hasPermission('AbpIdentity.OrganizationUnitManagement.Update');
+      let deleted = hasPermission('AbpIdentity.OrganizationUnitManagement.Delete');
       return [
         {
           label: t("common.createText"),
+          hidden: !create,
           handler: () => {
             let record = {
               parentId: node.eventKey,
@@ -196,6 +195,7 @@ export default defineComponent({
         },
         {
           label: t("common.editText"),
+          hidden: !update,
           handler: () => {
             let record = {
               id: node.eventKey,
@@ -207,6 +207,7 @@ export default defineComponent({
         },
         {
           label: t("common.delText"),
+          hidden: !deleted,
           handler: () => {
             createConfirm({
               iconType: "warning",
@@ -222,7 +223,6 @@ export default defineComponent({
         }
       ];
     }
-
     async function handleSelect(keys) {
       if (keys.length > 0) {
         organizationUnitId = keys[0];
@@ -234,9 +234,7 @@ export default defineComponent({
       } else {
         organizationUnitId = "";
       }
-
     }
-
     const getUserAsync = async () => {
       if (organizationUnitId) {
         let request = new GetOrganizationUnitUserInput();
@@ -244,16 +242,13 @@ export default defineComponent({
         request.organizationUnitId = organizationUnitId;
         return await getUserTableListAsync(request);
       }
-
     };
-
     const getRoleAsync = async () => {
       if (organizationUnitId) {
         let request = new GetOrganizationUnitRoleInput();
         request.organizationUnitId = organizationUnitId;
         return await getRoleTableListAsync(request);
       }
-
     };
     const [registerUserTable, { reload: reloadUser, getForm: getUserForm }] = useTable({
       columns: userTableColumns,
@@ -277,7 +272,6 @@ export default defineComponent({
         fixed: "right"
       }
     });
-
     const [registerRoleTable, { reload: reloadRole }] = useTable({
       columns: roleTableColumns,
       api: getRoleAsync,
@@ -297,7 +291,6 @@ export default defineComponent({
       }
     });
     const activeKeyChange = async (activeKey) => {
-
       if (organizationUnitId) {
         if (activeKey == 1) {
           await reloadUser();
@@ -305,10 +298,7 @@ export default defineComponent({
           await reloadRole();
         }
       }
-
-
     };
-
     const handleUserDelete = async (record: Recordable) => {
       let msg = t("common.askDelete");
       createConfirm({
@@ -324,7 +314,6 @@ export default defineComponent({
         }
       });
     };
-
     const handleRoleDelete = async (record: Recordable) => {
       let msg = t("common.askDelete");
       createConfirm({
