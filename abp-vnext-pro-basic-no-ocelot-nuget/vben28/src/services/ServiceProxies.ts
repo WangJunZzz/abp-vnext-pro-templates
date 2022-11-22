@@ -1160,8 +1160,8 @@ export class DataDictionaryServiceProxy extends ServiceProxyBase {
      * @param body (optional) 
      * @return Success
      */
-    deleteDictinaryType(body: IdInput | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
-        let url_ = this.baseUrl + "/DataDictionary/deleteDictinaryType";
+    deleteDataDictionaryType(body: IdInput | undefined , cancelToken?: CancelToken | undefined): Promise<void> {
+        let url_ = this.baseUrl + "/DataDictionary/deleteDataDictionaryType";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -1185,11 +1185,11 @@ export class DataDictionaryServiceProxy extends ServiceProxyBase {
                 throw _error;
             }
         }).then((_response: AxiosResponse) => {
-            return this.transformResult(url_, _response, (_response: AxiosResponse) => this.processDeleteDictinaryType(_response));
+            return this.transformResult(url_, _response, (_response: AxiosResponse) => this.processDeleteDataDictionaryType(_response));
         });
     }
 
-    protected processDeleteDictinaryType(response: AxiosResponse): Promise<void> {
+    protected processDeleteDataDictionaryType(response: AxiosResponse): Promise<void> {
         const status = response.status;
         let _headers: any = {};
         if (response.headers && typeof response.headers === "object") {
@@ -6408,6 +6408,7 @@ export class ApplicationConfigurationDto implements IApplicationConfigurationDto
     timing!: TimingDto;
     clock!: ClockDto;
     objectExtensions!: ObjectExtensionsDto;
+    extraProperties!: { [key: string]: any; } | undefined;
 
     constructor(data?: IApplicationConfigurationDto) {
         if (data) {
@@ -6431,6 +6432,13 @@ export class ApplicationConfigurationDto implements IApplicationConfigurationDto
             this.timing = _data["timing"] ? TimingDto.fromJS(_data["timing"]) : <any>undefined;
             this.clock = _data["clock"] ? ClockDto.fromJS(_data["clock"]) : <any>undefined;
             this.objectExtensions = _data["objectExtensions"] ? ObjectExtensionsDto.fromJS(_data["objectExtensions"]) : <any>undefined;
+            if (_data["extraProperties"]) {
+                this.extraProperties = {} as any;
+                for (let key in _data["extraProperties"]) {
+                    if (_data["extraProperties"].hasOwnProperty(key))
+                        (<any>this.extraProperties)![key] = _data["extraProperties"][key];
+                }
+            }
         }
     }
 
@@ -6454,6 +6462,13 @@ export class ApplicationConfigurationDto implements IApplicationConfigurationDto
         data["timing"] = this.timing ? this.timing.toJSON() : <any>undefined;
         data["clock"] = this.clock ? this.clock.toJSON() : <any>undefined;
         data["objectExtensions"] = this.objectExtensions ? this.objectExtensions.toJSON() : <any>undefined;
+        if (this.extraProperties) {
+            data["extraProperties"] = {};
+            for (let key in this.extraProperties) {
+                if (this.extraProperties.hasOwnProperty(key))
+                    (<any>data["extraProperties"])[key] = (<any>this.extraProperties)[key];
+            }
+        }
         return data;
     }
 }
@@ -6470,6 +6485,7 @@ export interface IApplicationConfigurationDto {
     timing: TimingDto;
     clock: ClockDto;
     objectExtensions: ObjectExtensionsDto;
+    extraProperties: { [key: string]: any; } | undefined;
 }
 
 export class ApplicationFeatureConfigurationDto implements IApplicationFeatureConfigurationDto {
@@ -12105,6 +12121,11 @@ export class PropertyApiDescriptionModel implements IPropertyApiDescriptionModel
     type!: string | undefined;
     typeSimple!: string | undefined;
     isRequired!: boolean;
+    minLength!: number | undefined;
+    maxLength!: number | undefined;
+    minimum!: string | undefined;
+    maximum!: string | undefined;
+    regex!: string | undefined;
 
     constructor(data?: IPropertyApiDescriptionModel) {
         if (data) {
@@ -12122,6 +12143,11 @@ export class PropertyApiDescriptionModel implements IPropertyApiDescriptionModel
             this.type = _data["type"];
             this.typeSimple = _data["typeSimple"];
             this.isRequired = _data["isRequired"];
+            this.minLength = _data["minLength"];
+            this.maxLength = _data["maxLength"];
+            this.minimum = _data["minimum"];
+            this.maximum = _data["maximum"];
+            this.regex = _data["regex"];
         }
     }
 
@@ -12139,6 +12165,11 @@ export class PropertyApiDescriptionModel implements IPropertyApiDescriptionModel
         data["type"] = this.type;
         data["typeSimple"] = this.typeSimple;
         data["isRequired"] = this.isRequired;
+        data["minLength"] = this.minLength;
+        data["maxLength"] = this.maxLength;
+        data["minimum"] = this.minimum;
+        data["maximum"] = this.maximum;
+        data["regex"] = this.regex;
         return data;
     }
 }
@@ -12149,6 +12180,11 @@ export interface IPropertyApiDescriptionModel {
     type: string | undefined;
     typeSimple: string | undefined;
     isRequired: boolean;
+    minLength: number | undefined;
+    maxLength: number | undefined;
+    minimum: string | undefined;
+    maximum: string | undefined;
+    regex: string | undefined;
 }
 
 export class RemoteServiceErrorInfo implements IRemoteServiceErrorInfo {

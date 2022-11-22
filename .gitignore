@@ -283,3 +283,5 @@ aspnet-core/services/host/Lion.AbpPro.Web.Blazor.Server/Logs/logs.txt
 /aspnet-core/services/host/Lion.AbpPro.HttpApi.Host/logs
 /vben271/package-lock.json
 /docs/site
+/abp-vnext-pro-basic-no-ocelot-nuget/aspnet-core/host/MyCompanyName.MyProjectName.HttpApi.Host/logs
+/abp-vnext-pro-basic-nuget/aspnet-core/services/host/MyCompanyName.MyProjectName.HttpApi.Host/logs

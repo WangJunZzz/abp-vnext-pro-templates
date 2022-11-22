@@ -7,7 +7,7 @@
     <PropertyGroup>
         <LangVersion>latest</LangVersion>
         <Version>1.0.0</Version>
-        <NoWarn>$(NoWarn);CS1591;CS0436</NoWarn>
+        <NoWarn>$(NoWarn);CS1591;CS0436;NU1504</NoWarn>
         <AbpProjectType>app</AbpProjectType>
         <ImplicitUsings>true</ImplicitUsings>
         <Authors>WangJunZzz</Authors>
