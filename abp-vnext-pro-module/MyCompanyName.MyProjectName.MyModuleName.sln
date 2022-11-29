@@ -33,6 +33,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCompanyName.MyProjectName
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCompanyName.MyProjectName.MyModuleName.Application.Tests", "test\MyCompanyName.MyProjectName.MyModuleName.Application.Tests\MyCompanyName.MyProjectName.MyModuleName.Application.Tests.csproj", "{7C4EE2EC-8793-4A96-817C-83318C0D5DCD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Solution Items", "0.Solution Items", "{A1585563-E304-4C1A-982F-EFB9A17212B4}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.Lion.targets = Directory.Build.Lion.targets
+		Directory.Build.Microsoft.targets = Directory.Build.Microsoft.targets
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Build.Volo.targets = Directory.Build.Volo.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

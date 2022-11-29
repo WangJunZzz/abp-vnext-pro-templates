@@ -1,7 +1,10 @@
+using Lion.AbpPro.Core;
+
 namespace MyCompanyName.MyProjectName.MyModuleName
 {
     [DependsOn(
-        typeof(AbpValidationModule)
+        typeof(AbpValidationModule),
+        typeof(LionAbpProCoreModule)
     )]
     public class MyModuleNameDomainSharedModule : AbpModule
     {
