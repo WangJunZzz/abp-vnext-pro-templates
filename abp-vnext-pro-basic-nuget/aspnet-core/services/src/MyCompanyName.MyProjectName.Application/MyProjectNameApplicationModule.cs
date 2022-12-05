@@ -8,8 +8,7 @@ namespace MyCompanyName.MyProjectName
         typeof(BasicManagementApplicationModule),
         typeof(NotificationManagementApplicationModule),
         typeof(DataDictionaryManagementApplicationModule),
-        typeof(MyProjectNameFreeSqlModule),
-        typeof(AbpBackgroundJobsHangfireModule)
+        typeof(MyProjectNameFreeSqlModule)
         )]
     public class MyProjectNameApplicationModule : AbpModule
     {

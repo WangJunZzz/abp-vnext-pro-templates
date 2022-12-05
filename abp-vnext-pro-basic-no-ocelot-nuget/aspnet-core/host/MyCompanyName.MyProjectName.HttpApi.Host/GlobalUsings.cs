@@ -12,7 +12,6 @@ global using Hangfire.Common;
 global using Hangfire.Dashboard;
 global using Hangfire.States;
 global using Hangfire.Storage;
-global using Lion.AbpPro.Shared.Hosting.Microservices.Swaggers;
 global using MyCompanyName.MyProjectName.EntityFrameworkCore;
 global using MyCompanyName.MyProjectName.Extensions;
 global using MyCompanyName.MyProjectName.Extensions.Hangfire;

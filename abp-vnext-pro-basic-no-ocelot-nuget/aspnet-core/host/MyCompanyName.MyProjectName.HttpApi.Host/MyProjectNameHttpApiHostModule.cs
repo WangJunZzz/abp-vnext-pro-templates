@@ -1,7 +1,7 @@
+using Lion.AbpPro;
 using Lion.AbpPro.DataDictionaryManagement;
 using Lion.AbpPro.NotificationManagement;
-using Lion.AbpPro.Shared.Hosting.Microservices;
-using Lion.AbpPro.Shared.Hosting.Microservices.Microsoft.AspNetCore.Builder;
+using Swagger;
 
 namespace MyCompanyName.MyProjectName
 {

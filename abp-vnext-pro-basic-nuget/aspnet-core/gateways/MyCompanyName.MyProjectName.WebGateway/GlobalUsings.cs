@@ -4,6 +4,7 @@ global using System;
 global using System.Collections.Generic;
 global using System.Linq;
 global using System.Threading.Tasks;
+global using Lion.AbpPro;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Cors;
 global using Microsoft.AspNetCore.Hosting;

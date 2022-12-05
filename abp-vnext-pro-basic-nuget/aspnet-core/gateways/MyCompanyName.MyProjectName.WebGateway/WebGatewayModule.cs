@@ -1,5 +1,3 @@
-using Lion.AbpPro.Shared.Hosting.Gateways;
-
 namespace MyCompanyName.MyProjectName.WebGateway
 {
     [DependsOn(
