@@ -413,6 +413,6 @@ export async function deleteDictionaryTypeAsync({ id, reloadType }) {
   const _dataDictionaryServiceProxy = new DataDictionaryServiceProxy();
   const request = new IdInput();
   request.id = id;
-  await _dataDictionaryServiceProxy.deleteDictionaryTypeAsync(request);
+  await _dataDictionaryServiceProxy.deleteDataDictionaryType(request);
   reloadType();
 }
