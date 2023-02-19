@@ -1,6 +1,7 @@
 using Lion.AbpPro.BasicManagement.EntityFrameworkCore;
 using Lion.AbpPro.DataDictionaryManagement.EntityFrameworkCore;
 using Lion.AbpPro.NotificationManagement.EntityFrameworkCore;
+using Volo.Abp.Guids;
 
 namespace MyCompanyName.MyProjectName.EntityFrameworkCore
 {
@@ -26,7 +27,10 @@ namespace MyCompanyName.MyProjectName.EntityFrameworkCore
                  * default repositories only for aggregate roots */
                 options.AddDefaultRepositories(includeAllEntities: true);
             });
-
+            Configure<AbpSequentialGuidGeneratorOptions>(options =>
+            {
+                options.DefaultSequentialGuidType = SequentialGuidType.SequentialAsString;
+            });
             Configure<AbpDbContextOptions>(options =>
             {
                 /* The main point to change your DBMS.
