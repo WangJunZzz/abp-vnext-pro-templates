@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-
+    
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <RootNamespace>MyCompanyName.MyProjectName</RootNamespace>
@@ -11,7 +10,6 @@
     </ItemGroup>
 
     <ItemGroup>
-
         <PackageReference Include="Volo.Abp.ObjectExtending"/>
         <PackageReference Include="Lion.AbpPro.BasicManagement.Application.Contracts"/>
         <PackageReference Include="Lion.AbpPro.NotificationManagement.Application.Contracts"/>

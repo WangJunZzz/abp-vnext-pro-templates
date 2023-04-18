@@ -41,7 +41,7 @@ namespace MyCompanyName.MyProjectName.EntityFrameworkCore
         public DbSet<BackgroundJobRecord> BackgroundJobs { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
         public DbSet<Notification> Notifications { get; set; }
-        public DbSet<DataDictionary> DataDictionary { get; set; }
+        public DbSet<DataDictionary> DataDictionaries { get; set; }
         public MyProjectNameDbContext(DbContextOptions<MyProjectNameDbContext> options)
             : base(options)
         {
@@ -49,25 +49,19 @@ namespace MyCompanyName.MyProjectName.EntityFrameworkCore
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            NotificationManagementDbProperties.DbTablePrefix = "Abp";
-            DataDictionaryManagementDbProperties.DbTablePrefix = "Abp";
-            
+
             base.OnModelCreating(builder);
-
-
+            
             builder.ConfigureMyProjectName();
 
             // 基础模块
             builder.ConfigureBasicManagement();
-
-
+            
             // 消息通知
             builder.ConfigureNotificationManagement();
             
             //数据字典
             builder.ConfigureDataDictionaryManagement();
         }
-
-      
     }
 }

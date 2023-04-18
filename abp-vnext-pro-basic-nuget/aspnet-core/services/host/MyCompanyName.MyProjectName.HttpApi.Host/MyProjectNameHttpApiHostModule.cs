@@ -15,32 +15,16 @@ namespace MyCompanyName.MyProjectName
         typeof(AbpAccountWebModule),
         typeof(MyProjectNameApplicationModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
-        typeof(AbpCachingStackExchangeRedisModule),
-        typeof(AbpBackgroundJobsHangfireModule)
+        typeof(AbpCachingStackExchangeRedisModule)
     )]
     public class MyProjectNameHttpApiHostModule : AbpModule
     {
-        public override void OnPostApplicationInitialization(
-            ApplicationInitializationContext context)
-        {
-            // 应用程序初始化的时候注册hangfire
-            context.CreateRecurringJob();
-            base.OnPostApplicationInitialization(context);
-        }
-
-        public override void PostConfigureServices(ServiceConfigurationContext context)
-        {
-            NotificationManagementDbProperties.DbTablePrefix = "Abp";
-            DataDictionaryManagementDbProperties.DbTablePrefix = "Abp";
-        }
-
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var configuration = context.Services.GetConfiguration();
             ConfigureCache(context);
             ConfigureSwaggerServices(context);
             ConfigureJwtAuthentication(context, configuration);
-            ConfigureHangfire(context);
             ConfigureMiniProfiler(context);
             ConfigureIdentity(context);
             ConfigureAuditLog(context);
@@ -50,7 +34,7 @@ namespace MyCompanyName.MyProjectName
         {
             var app = context.GetApplicationBuilder();
             var configuration = context.GetConfiguration();
-            //app.UseRequestLog();
+
             app.UseAbpRequestLocalization();
             app.UseCorrelationId();
             app.UseStaticFiles();
@@ -78,11 +62,7 @@ namespace MyCompanyName.MyProjectName
 
             app.UseUnitOfWork();
             app.UseConfiguredEndpoints(endpoints => { endpoints.MapHealthChecks("/health"); });
-            app.UseHangfireDashboard("/hangfire", new DashboardOptions()
-            {
-                Authorization = new[] { new CustomHangfireAuthorizeFilter() },
-                IgnoreAntiforgeryToken = true
-            });
+
 
             if (configuration.GetValue("Consul:Enabled", false))
             {
@@ -90,23 +70,6 @@ namespace MyCompanyName.MyProjectName
             }
         }
 
-
-   
-
-        private void ConfigureHangfire(ServiceConfigurationContext context)
-        {
-            Configure<AbpBackgroundJobOptions>(options => { options.IsJobExecutionEnabled = true; });
-            context.Services.AddHangfireServer();
-            context.Services.AddHangfire(config =>
-            {
-                config.UseRedisStorage(ConnectionMultiplexer.Connect(context.Services.GetConfiguration().GetConnectionString("Hangfire")));
-                var delaysInSeconds = new[] { 10, 60, 60 * 3 }; // 重试时间间隔
-                const int Attempts = 3; // 重试次数
-                config.UseFilter(new AutomaticRetryAttribute() { Attempts = Attempts, DelaysInSeconds = delaysInSeconds });
-                config.UseFilter(new AutoDeleteAfterSuccessAttributer(TimeSpan.FromDays(7)));
-                config.UseFilter(new JobRetryLastFilter(Attempts));
-            });
-        }
 
         /// <summary>
         /// 配置MiniProfiler
@@ -185,7 +148,6 @@ namespace MyCompanyName.MyProjectName
                 });
         }
 
-   
 
         /// <summary>
         /// Redis缓存
@@ -200,7 +162,7 @@ namespace MyCompanyName.MyProjectName
                 .AddDataProtection()
                 .PersistKeysToStackExchangeRedis(redis, "MyProjectName-Protection-Keys");
         }
-        
+
 
         /// <summary>
         /// 配置Identity
@@ -278,7 +240,6 @@ namespace MyCompanyName.MyProjectName
         }
 
 
-    
         /// <summary>
         /// 审计日志
         /// </summary>

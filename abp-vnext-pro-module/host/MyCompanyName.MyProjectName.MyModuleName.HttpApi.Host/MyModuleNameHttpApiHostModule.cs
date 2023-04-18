@@ -8,9 +8,9 @@ namespace MyCompanyName.MyProjectName.MyModuleName
         typeof(AbpAutofacModule),
         typeof(AbpCachingStackExchangeRedisModule),
         typeof(AbpEntityFrameworkCoreMySQLModule),
-        typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-        typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-        typeof(AbpSettingManagementEntityFrameworkCoreModule),
+        //typeof(AbpAuditLoggingEntityFrameworkCoreModule),
+        //typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+        //typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreSerilogModule),
         typeof(AbpSwashbuckleModule)
         )]

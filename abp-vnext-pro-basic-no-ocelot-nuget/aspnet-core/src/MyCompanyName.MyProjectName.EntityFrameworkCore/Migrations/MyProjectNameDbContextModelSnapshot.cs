@@ -87,7 +87,7 @@ namespace MyCompanyName.MyProjectName.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpDataDictionary", (string)null);
+                    b.ToTable("AbpDataDictionaries", (string)null);
                 });
 
             modelBuilder.Entity("Lion.AbpPro.DataDictionaryManagement.DataDictionaries.Aggregates.DataDictionaryDetail", b =>
@@ -133,7 +133,7 @@ namespace MyCompanyName.MyProjectName.Migrations
 
                     b.HasIndex("DataDictionaryId");
 
-                    b.ToTable("AbpDataDictionaryDetail", (string)null);
+                    b.ToTable("AbpDataDictionaryDetails", (string)null);
                 });
 
             modelBuilder.Entity("Lion.AbpPro.NotificationManagement.Notifications.Aggregates.Notification", b =>
@@ -202,7 +202,7 @@ namespace MyCompanyName.MyProjectName.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AbpNotification", (string)null);
+                    b.ToTable("AbpNotifications", (string)null);
                 });
 
             modelBuilder.Entity("Lion.AbpPro.NotificationManagement.Notifications.Aggregates.NotificationSubscription", b =>
@@ -240,7 +240,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("LastModifierId");
 
-                    b.Property<Guid?>("NotificationId")
+                    b.Property<Guid>("NotificationId")
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("Read")
@@ -256,7 +256,7 @@ namespace MyCompanyName.MyProjectName.Migrations
 
                     b.HasIndex("NotificationId");
 
-                    b.ToTable("AbpNotificationSubscription", (string)null);
+                    b.ToTable("AbpNotificationSubscriptions", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -774,6 +774,9 @@ namespace MyCompanyName.MyProjectName.Migrations
                         .HasColumnType("varchar(40)")
                         .HasColumnName("ConcurrencyStamp");
 
+                    b.Property<int>("EntityVersion")
+                        .HasColumnType("int");
+
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("longtext")
                         .HasColumnName("ExtraProperties");
@@ -957,6 +960,9 @@ namespace MyCompanyName.MyProjectName.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false)
                         .HasColumnName("EmailConfirmed");
+
+                    b.Property<int>("EntityVersion")
+                        .HasColumnType("int");
 
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("longtext")
@@ -1235,6 +1241,9 @@ namespace MyCompanyName.MyProjectName.Migrations
                         .HasColumnType("varchar(128)")
                         .HasColumnName("DisplayName");
 
+                    b.Property<int>("EntityVersion")
+                        .HasColumnType("int");
+
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("longtext")
                         .HasColumnName("ExtraProperties");
@@ -1465,6 +1474,9 @@ namespace MyCompanyName.MyProjectName.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("DeletionTime");
 
+                    b.Property<int>("EntityVersion")
+                        .HasColumnType("int");
+
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("longtext")
                         .HasColumnName("ExtraProperties");
@@ -1527,7 +1539,9 @@ namespace MyCompanyName.MyProjectName.Migrations
                 {
                     b.HasOne("Lion.AbpPro.NotificationManagement.Notifications.Aggregates.Notification", null)
                         .WithMany("NotificationSubscriptions")
-                        .HasForeignKey("NotificationId");
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>

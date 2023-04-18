@@ -119,7 +119,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "AbpDataDictionary",
+                name: "AbpDataDictionaries",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -144,7 +144,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpDataDictionary", x => x.Id);
+                    table.PrimaryKey("PK_AbpDataDictionaries", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -235,7 +235,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "AbpNotification",
+                name: "AbpNotifications",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -260,7 +260,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpNotification", x => x.Id);
+                    table.PrimaryKey("PK_AbpNotifications", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -275,6 +275,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DisplayName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    EntityVersion = table.Column<int>(type: "int", nullable: false),
                     ExtraProperties = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ConcurrencyStamp = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: true)
@@ -376,6 +377,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                     IsDefault = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsStatic = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsPublic = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    EntityVersion = table.Column<int>(type: "int", nullable: false),
                     ExtraProperties = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ConcurrencyStamp = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: true)
@@ -451,6 +453,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    EntityVersion = table.Column<int>(type: "int", nullable: false),
                     ExtraProperties = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ConcurrencyStamp = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: true)
@@ -501,6 +504,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    EntityVersion = table.Column<int>(type: "int", nullable: false),
                     ExtraProperties = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ConcurrencyStamp = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: true)
@@ -579,7 +583,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "AbpDataDictionaryDetail",
+                name: "AbpDataDictionaryDetails",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -599,25 +603,25 @@ namespace MyCompanyName.MyProjectName.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpDataDictionaryDetail", x => x.Id);
+                    table.PrimaryKey("PK_AbpDataDictionaryDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AbpDataDictionaryDetail_AbpDataDictionary_DataDictionaryId",
+                        name: "FK_AbpDataDictionaryDetails_AbpDataDictionaries_DataDictionaryId",
                         column: x => x.DataDictionaryId,
-                        principalTable: "AbpDataDictionary",
+                        principalTable: "AbpDataDictionaries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "AbpNotificationSubscription",
+                name: "AbpNotificationSubscriptions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    NotificationId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     ReceiveId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Read = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ReadTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    NotificationId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     CreatorId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -628,12 +632,13 @@ namespace MyCompanyName.MyProjectName.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AbpNotificationSubscription", x => x.Id);
+                    table.PrimaryKey("PK_AbpNotificationSubscriptions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AbpNotificationSubscription_AbpNotification_NotificationId",
+                        name: "FK_AbpNotificationSubscriptions_AbpNotifications_NotificationId",
                         column: x => x.NotificationId,
-                        principalTable: "AbpNotification",
-                        principalColumn: "Id");
+                        principalTable: "AbpNotifications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -893,8 +898,8 @@ namespace MyCompanyName.MyProjectName.Migrations
                 columns: new[] { "IsAbandoned", "NextTryTime" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpDataDictionaryDetail_DataDictionaryId",
-                table: "AbpDataDictionaryDetail",
+                name: "IX_AbpDataDictionaryDetails_DataDictionaryId",
+                table: "AbpDataDictionaryDetails",
                 column: "DataDictionaryId");
 
             migrationBuilder.CreateIndex(
@@ -942,8 +947,8 @@ namespace MyCompanyName.MyProjectName.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AbpNotificationSubscription_NotificationId",
-                table: "AbpNotificationSubscription",
+                name: "IX_AbpNotificationSubscriptions_NotificationId",
+                table: "AbpNotificationSubscriptions",
                 column: "NotificationId");
 
             migrationBuilder.CreateIndex(
@@ -1079,7 +1084,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                 name: "AbpClaimTypes");
 
             migrationBuilder.DropTable(
-                name: "AbpDataDictionaryDetail");
+                name: "AbpDataDictionaryDetails");
 
             migrationBuilder.DropTable(
                 name: "AbpEntityPropertyChanges");
@@ -1097,7 +1102,7 @@ namespace MyCompanyName.MyProjectName.Migrations
                 name: "AbpLinkUsers");
 
             migrationBuilder.DropTable(
-                name: "AbpNotificationSubscription");
+                name: "AbpNotificationSubscriptions");
 
             migrationBuilder.DropTable(
                 name: "AbpOrganizationUnitRoles");
@@ -1139,13 +1144,13 @@ namespace MyCompanyName.MyProjectName.Migrations
                 name: "AbpUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AbpDataDictionary");
+                name: "AbpDataDictionaries");
 
             migrationBuilder.DropTable(
                 name: "AbpEntityChanges");
 
             migrationBuilder.DropTable(
-                name: "AbpNotification");
+                name: "AbpNotifications");
 
             migrationBuilder.DropTable(
                 name: "AbpTenants");
