@@ -1,6 +1,4 @@
 using Lion.AbpPro;
-using Lion.AbpPro.DataDictionaryManagement;
-using Lion.AbpPro.NotificationManagement;
 using Swagger;
 
 namespace MyCompanyName.MyProjectName
@@ -28,6 +26,7 @@ namespace MyCompanyName.MyProjectName
             ConfigureMiniProfiler(context);
             ConfigureIdentity(context);
             ConfigureAuditLog(context);
+            ConfigurationSignalR(context);
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -70,6 +69,17 @@ namespace MyCompanyName.MyProjectName
             }
         }
 
+        private void ConfigurationSignalR(ServiceConfigurationContext context)
+        {
+            var redisConnection = context.Services.GetConfiguration()["Redis:Configuration"];
+
+            if (redisConnection.IsNullOrWhiteSpace())
+            {
+                throw new UserFriendlyException(message: "Redis连接字符串未配置.");
+            }
+
+            context.Services.AddSignalR().AddStackExchangeRedis(redisConnection, options => { options.Configuration.ChannelPrefix = "Lion.AbpPro"; });
+        }
 
         /// <summary>
         /// 配置MiniProfiler

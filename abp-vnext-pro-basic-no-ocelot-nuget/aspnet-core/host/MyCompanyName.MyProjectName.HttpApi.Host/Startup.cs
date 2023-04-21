@@ -10,7 +10,6 @@ namespace MyCompanyName.MyProjectName
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.InitializeApplication();
-          
         }
     }
 }
