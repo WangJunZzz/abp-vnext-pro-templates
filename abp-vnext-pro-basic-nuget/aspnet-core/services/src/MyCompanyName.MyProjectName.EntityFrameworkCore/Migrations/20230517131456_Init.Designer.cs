@@ -12,7 +12,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace MyCompanyName.MyProjectName.Migrations
 {
     [DbContext(typeof(MyProjectNameDbContext))]
-    [Migration("20230418095258_Init")]
+    [Migration("20230517131456_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -995,6 +995,9 @@ namespace MyCompanyName.MyProjectName.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<DateTimeOffset?>("LastPasswordChangeTime")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<bool>("LockoutEnabled")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
@@ -1042,6 +1045,9 @@ namespace MyCompanyName.MyProjectName.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)")
                         .HasColumnName("SecurityStamp");
+
+                    b.Property<bool>("ShouldChangePasswordOnNextLogin")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Surname")
                         .HasMaxLength(64)
@@ -1103,6 +1109,32 @@ namespace MyCompanyName.MyProjectName.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AbpUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Volo.Abp.Identity.IdentityUserDelegation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("SourceUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("TargetUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("TenantId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AbpUserDelegations", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.Identity.IdentityUserLogin", b =>

@@ -473,6 +473,23 @@ namespace MyCompanyName.MyProjectName.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "AbpUserDelegations",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    TenantId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    SourceUserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    TargetUserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    StartTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AbpUserDelegations", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "AbpUsers",
                 columns: table => new
                 {
@@ -504,7 +521,9 @@ namespace MyCompanyName.MyProjectName.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    ShouldChangePasswordOnNextLogin = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     EntityVersion = table.Column<int>(type: "int", nullable: false),
+                    LastPasswordChangeTime = table.Column<DateTimeOffset>(type: "datetime(6)", nullable: true),
                     ExtraProperties = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ConcurrencyStamp = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: true)
@@ -1130,6 +1149,9 @@ namespace MyCompanyName.MyProjectName.Migrations
 
             migrationBuilder.DropTable(
                 name: "AbpUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AbpUserDelegations");
 
             migrationBuilder.DropTable(
                 name: "AbpUserLogins");

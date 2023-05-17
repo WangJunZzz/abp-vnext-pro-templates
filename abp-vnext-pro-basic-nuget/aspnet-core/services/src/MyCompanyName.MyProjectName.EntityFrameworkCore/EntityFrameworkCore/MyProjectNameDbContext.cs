@@ -29,6 +29,7 @@ namespace MyCompanyName.MyProjectName.EntityFrameworkCore
         public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
         public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
         public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+        public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
         public DbSet<FeatureGroupDefinitionRecord> FeatureGroups { get; set; }
         public DbSet<FeatureDefinitionRecord> Features { get; set; }
         public DbSet<FeatureValue> FeatureValues { get; set; }
